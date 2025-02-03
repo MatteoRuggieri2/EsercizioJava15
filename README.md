@@ -1,71 +1,84 @@
+# Collection
 
-ScanAutoEnum
+## ScanAutoEnum
 
-La classe deve essere codificata utilizzando le classi di Collection.
+L'esercizio deve essere svolto utilizzando le classi di `Collection`.
+
+Creare la classe `ScanAutoEnum` con relativo JUnit di test `ScanAutoEnumTest`.
+Al suo interno inserire un solo costruttore.
 
 ```java
-Class ScanAutoEnum implements Auto
-EnumAuto(String fileName) // Un solo costruttore
+class ScanAutoEnum implements Auto {
+    ScanAutoEnum(String fileName) // Un solo costruttore
+}
 ```
 
-Leggere un file con informazioni da decodificare.
-Il file, per ogni riga, contiene n valori, tutti di lunghezza variabile, separati da space:
+Leggere il file "*auto-brands.txt*", al suo interno, per ogni riga, sono contenuti ***n*** valori, tutti di lunghezza variabile, separati da spazi.
+
+Esempio di file .txt
 
 ```txt
-X Y1 Y2 … Yn
-
-X può contenere i valori delle auto gestite
-AUDI
-FIAT
-...
-TESLA
-WS
-```
-
-Y contiene un possibile modello di auto (A4, TIPO etc.) specifico per la fabbrica di auto
-
-Esempio di file
-
-```txt
-FIAT PANDA
-FIAT TIPO
+STELLANTIS TIPO PANDA
 AUDI QUATTRO
+SKODA FABIA
 ```
 
- 1) Si vuole analizzare il file, scartare le righe con fabbriche di auto non definite e/o di modelli non previsti.
- 2) Si vogliono ottenere le informazioni del file in input.
- 3) Il problema deve essere risolto a livello DICHIARATIVO senza specifiche IF nel programma, con una Enumeration `EnumAuto`
+### Gestione degli errori
 
-Enumeration `EnumAuto`
+Si definisca una *Exception* `AutoFileInputEmpty` da lanciare in caso di file vuoto o inesistente.
+
+### Output
+
+Stampare le righe del file scartando le righe con fabbriche di auto non definite e/o di modelli non previsti e le righe vuote.
+
+### Consigli
+
+Il problema deve essere risolto a livello **DICHIARATIVO** senza specifiche "if" nel programma, con una Enumeration `EnumAuto`.
+
+## Files
+
+**Auto.java**
 
 ```java
-STELLANTIS("TIPO", "PANDA", "500")
-, AUDI("A4")
-…
-, TESLA("T1");
+public interface Auto {
+    String[] rowsWrong(); // Righe errate as-is
+    String[] rowsGood(); // Righe corrette
+    String[] autoProducers(); // [FIAT,TESLA,..] ordine crescente
+    String[] autoProducersDefined(); // FIAT/TESLA/..
+    boolean existsProducer(String autoProducer);
+    boolean existsModel(String autoProducer, String autoModel);
+}
 ```
 
-4) EnumAuto deve esporre il metodo `String[] getModelli()`
-5) Si definisca una Exception AutoFileInputEmpty da lanciare in caso di file vuoto o inesistente
-6) Scartare le righe vuote
-
-7) Definire l’interface Auto per esporre le funzionalità richieste
+**EnumAuto.java**
 
 ```java
-interface Auto
-String[] rowsWrong(); // Righe errate as-is
-String[] rowsGood(); // Righe corrette
-String[] autoProducers() // [FIAT,TESLA,..] ordine crescente
-String[] autoProducersDefined(); // FIAT/TESLA/..
-boolean existsProducer(String autoProducer)
-boolean existsModel(String autoProducer, String autoModel)
+public enum EnumAuto {
+    STELLANTIS("TIPO", "PANDA", "500"),
+    AUDI("A4"),
+    TESLA("T1");
+    
+    private String[] arrModello;
+    
+    private EnumAuto(String ... modello) {
+        this.arrModello = modello;
+    }
+    
+    public String[] getModelli() {
+        return this.arrModello;
+    }
+}
 ```
 
-Enumeration EnumAuto
+**auto-brands.txt**
 
-```java
-STELLANTIS("TIPO", "PANDA", "500")
-, AUDI("A4")
-…
-, TESLA("T1");
+```txt
+BMW
+STELLANTIS TIPO PANDA 500
+AUDI A4 A5 A6
+VW
+CITROEN
+SKODA FABIA
+PORSCHE GTRS3 CAYENNE TAYCAN
+
 ```
