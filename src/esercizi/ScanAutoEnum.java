@@ -12,6 +12,14 @@ import java.util.Set;
 
 public class ScanAutoEnum implements Auto {
 	
+	//TODO
+	/* - guarda specifiche delle liste Collection
+	 * - controllare metodi già fatti
+	 * - completare metodi non definiti
+	 * - fare i test dei metodi */
+	
+	
+	
 	String fileLine;
 	
 	// Array List con tutte le righe del file salvate
