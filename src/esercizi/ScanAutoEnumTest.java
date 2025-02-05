@@ -35,5 +35,15 @@ class ScanAutoEnumTest {
 		assertFalse(scanAutoEnum.existsProducer("bmw"));
 		assertFalse(scanAutoEnum.existsProducer("BMW"));
 	}
+	
+	@Test
+	void existsModelTest() {
+		assertTrue(scanAutoEnum.existsModel("Stellantis", "Tipo"));
+		assertTrue(scanAutoEnum.existsModel("stellantis", "tipo"));
+		assertTrue(scanAutoEnum.existsModel("STELLANTIS", "TIPO"));
+		assertFalse(scanAutoEnum.existsModel("Stellantis", "600"));
+		assertFalse(scanAutoEnum.existsModel("Mercedes", "Panda"));
+		assertFalse(scanAutoEnum.existsModel("Porsche", "Taycan"));
+	}
 
 }
