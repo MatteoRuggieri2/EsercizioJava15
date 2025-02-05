@@ -68,7 +68,7 @@ public class ScanAutoEnum implements Auto {
 		return null;
 	}
 
-	// Ritorna i produttori che ci sono anche nell'enum
+	// Questo metodo ritorna "true" se il produttore passato esiste, altrimenti "false"
 	@Override
 	public boolean existsProducer(String autoProducer) {
 		
@@ -81,10 +81,23 @@ public class ScanAutoEnum implements Auto {
 		return false;
 	}
 
-	// Ritorna i modelli che ci sono anche nell'enum
+	// Questo metodo ritorna "true" se il produttore e il modello passati esistono, altrimenti "false"
 	@Override
 	public boolean existsModel(String autoProducer, String autoModel) {
-		// TODO Auto-generated method stub
+		
+		if (!existsProducer(autoProducer)) {
+			return false;
+		}
+		
+		EnumAuto enumProducer = EnumAuto.valueOf(autoProducer.toUpperCase());
+		String[] producerModels = enumProducer.getModelli();
+		
+		for (String model : producerModels) {
+			if (autoModel.equalsIgnoreCase(model)) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	
