@@ -191,7 +191,7 @@ public class ScanAutoEnum implements Auto {
 		String[] splittedString;
 		
 		// Splitto la riga e la ritorno
-		splittedString = string.strip().split(" +");
+		splittedString = string.strip().split(splitter);
 		return splittedString;
 	}
 	
