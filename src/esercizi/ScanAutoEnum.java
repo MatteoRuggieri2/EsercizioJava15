@@ -71,7 +71,13 @@ public class ScanAutoEnum implements Auto {
 	// Ritorna i produttori che ci sono anche nell'enum
 	@Override
 	public boolean existsProducer(String autoProducer) {
-		// TODO Auto-generated method stub
+		
+		for (EnumAuto enumProducer : EnumAuto.values()) {
+			if (autoProducer.equalsIgnoreCase(enumProducer.name())) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
