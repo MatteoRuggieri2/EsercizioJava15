@@ -47,6 +47,8 @@ public class ScanAutoEnum implements Auto {
 	@Override
 	public String[] rowsWrong() {
 		// TODO Auto-generated method stub
+		/* - Leggi tutte le righe da this.allFileRows
+		 * - Per ogni riga scarta se: riga vuota, produttore non definito e/o modello non definito */
 		return null;
 	}
 
