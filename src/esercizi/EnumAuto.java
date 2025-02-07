@@ -26,5 +26,17 @@ public enum EnumAuto {
 		return false;
 	}
 	
-	// Metodo che controlli l'esistenza del modello nel brand
+	/* Questo metodo ritorna un valore booleano se trova il modello
+	 * passato come parametro all'interno dell'enumerazione corrente.
+	 * es. Se passo "TIPO" e l'enum corrente è "STELLANTIS" tornerà "true" */
+	public boolean isModelDefined(String model) {
+		
+		for (String modello : arrModello) {
+			if (modello.equals(model)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
