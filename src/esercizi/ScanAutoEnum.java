@@ -19,10 +19,11 @@ public class ScanAutoEnum implements Auto {
 	 * - fare i test dei metodi */
 	
 	
-	
 	String fileLine;
 	
-	// Array List con tutte le righe del file salvate
+	String brand;
+	
+	// Array List con tutte le righe del file salvate (eccetto quelle vuote)
 	List<String> allFileRows = new ArrayList<String>();
 	
 	// HashSet con tutti i brand univoci all'interno del file
@@ -34,21 +35,20 @@ public class ScanAutoEnum implements Auto {
 	// Elenco righe corrette (in base all'enum)
 	List<String> allFileGoodRows = new ArrayList<String>();
 	
-	String brand;
 	
 	public ScanAutoEnum(String fileName) {
 		readFile(fileName);
 		getBrandFromFileRows(this.allFileRows);
 		compareFileRowsWithEnumAuto(this.allFileRows);
-		System.out.println("Righe giuste: \n" + allFileGoodRows);
-		System.out.println("Righe sbagliate: \n" + allFileWrongRows);
+		System.out.println("Righe giuste: \n" + this.allFileGoodRows);
+		System.out.println("Righe sbagliate: \n" + this.allFileWrongRows);
 	}
 
 	@Override
 	public String[] rowsWrong() {
 		// TODO Auto-generated method stub
 		/* - Leggi tutte le righe da this.allFileRows
-		 * - Per ogni riga scarta se: riga vuota, produttore non definito e/o modello non definito */
+		 * - Per ogni riga scarta se: produttore non definito e/o modello non definito */
 		return null;
 	}
 
@@ -103,9 +103,9 @@ public class ScanAutoEnum implements Auto {
 		return false;
 	}
 	
-	// Questa funzione legge il file in base all'indirizzo che gli passiamo in formato stringa
-	private void readFile(String fileName) {
-		String[] arrItems;
+	/* Questa funzione legge il file in base al path che gli passiamo,
+	salva ogni riga come elemento di this.allFileRows eccetto quelle vuote. */
+	public void readFile(String fileName) {
 		
 		try {
 			
@@ -115,8 +115,10 @@ public class ScanAutoEnum implements Auto {
 			// Preparo il file alla lettura
 			BufferedReader bufferedReader = new BufferedReader(autoBrandsFile);
 			
-			while ((this.fileLine = bufferedReader.readLine()) != null) {
-				this.allFileRows.add(this.fileLine);
+			while ((this.fileLine = bufferedReader.readLine().trim()) != null) {
+				if (!this.fileLine.equals("")) {
+					this.allFileRows.add(this.fileLine);
+				}
 			}
 			
 		} catch (IOException e) {
