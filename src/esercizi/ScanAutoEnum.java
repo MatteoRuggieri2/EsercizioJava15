@@ -115,11 +115,13 @@ public class ScanAutoEnum implements Auto {
 			// Preparo il file alla lettura
 			BufferedReader bufferedReader = new BufferedReader(autoBrandsFile);
 			
-			while ((this.fileLine = bufferedReader.readLine().trim()) != null) {
-				if (!this.fileLine.equals("")) {
+			while ((this.fileLine = bufferedReader.readLine()) != null) {
+				if (!this.fileLine.trim().isEmpty()) {
 					this.allFileRows.add(this.fileLine);
 				}
 			}
+			
+			bufferedReader.close();
 			
 		} catch (IOException e) {
 			System.err.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
