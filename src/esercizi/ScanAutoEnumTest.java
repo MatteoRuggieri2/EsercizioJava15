@@ -2,6 +2,9 @@ package esercizi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +12,9 @@ import org.junit.jupiter.api.Test;
 class ScanAutoEnumTest {
 	
 	static ScanAutoEnum scanAutoEnum;
+//	static ScanAutoEnum wrongScanAutoEnum;
 	static String autoBrandsFileName = "src/text_files/auto-brands.txt";
+//	static String autoBrandsWrongFileName = "src/text_files/wrong-file-name.txt";
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -18,6 +23,23 @@ class ScanAutoEnumTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		scanAutoEnum = new ScanAutoEnum(autoBrandsFileName);
+	}
+	
+	@Test
+	void readFileTest() {
+		
+		String[] rowsArr = {"BMW",
+			"STELLANTIS TIPO PANDA 500",
+			"AUDI A4 A5 A6",
+			"VW",
+			"CITROEN",
+			"SKODA FABIA",
+			"PORSCHE GTRS3 CAYENNE TAYCAN",
+		};
+		
+		scanAutoEnum.readFile(autoBrandsFileName);
+		assertArrayEquals(scanAutoEnum.allFileRows.toArray(), rowsArr);
+		
 	}
 
 	@Test
