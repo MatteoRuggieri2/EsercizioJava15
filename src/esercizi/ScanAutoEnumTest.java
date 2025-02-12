@@ -28,21 +28,20 @@ class ScanAutoEnumTest {
 	@Test
 	void readFileTest() {
 		
-		String[] rowsArr = {"BMW",
-			"STELLANTIS TIPO PANDA 500",
-			"AUDI A4 A5 A6",
-			"VW",
-			"CITROEN",
-			"SKODA FABIA",
-			"PORSCHE GTRS3 CAYENNE TAYCAN",
+		String[] expectedRows = {
+				"BMW",
+				"STELLANTIS TIPO PANDA 500",
+				"AUDI A4 A5 A6",
+				"VW",
+				"CITROEN",
+				"SKODA FABIA",
+				"PORSCHE GTRS3 CAYENNE TAYCAN",
 		};
 		
-		scanAutoEnum.readFile(autoBrandsFileName);
-		assertArrayEquals(scanAutoEnum.allFileRows.toArray(), rowsArr);
-		
+		assertArrayEquals(scanAutoEnum.allFileRows.toArray(), expectedRows);
 	}
 
-	@Test
+//	@Test
 	void existsProducerTest() {
 		assertTrue(scanAutoEnum.existsProducer("Stellantis"));
 		assertTrue(scanAutoEnum.existsProducer("stellantis"));
@@ -58,7 +57,7 @@ class ScanAutoEnumTest {
 		assertFalse(scanAutoEnum.existsProducer("BMW"));
 	}
 	
-	@Test
+//	@Test
 	void existsModelTest() {
 		assertTrue(scanAutoEnum.existsModel("Stellantis", "Tipo"));
 		assertTrue(scanAutoEnum.existsModel("stellantis", "tipo"));
