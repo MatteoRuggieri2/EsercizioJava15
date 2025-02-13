@@ -27,7 +27,7 @@ public class ScanAutoEnum implements Auto {
 	List<String> allFileRows = new ArrayList<String>();
 	
 	// HashSet con tutti i brand univoci all'interno del file
-	Set<String> allFileBrands = new HashSet<String>();
+	Set<String> allFileBrands = new LinkedHashSet<String>();
 	
 	// Elenco righe sbagliate (in base all'enum)
 	List<String> allFileWrongRows = new ArrayList<String>();
@@ -144,9 +144,9 @@ public class ScanAutoEnum implements Auto {
 		}
 		
 		// Stampo tutti i brand
-		for (String brand : allFileBrands) {
-			System.out.println(brand);
-		}
+//		for (String brand : allFileBrands) {
+//			System.out.println(brand);
+//		}
 		
 	}
 	
