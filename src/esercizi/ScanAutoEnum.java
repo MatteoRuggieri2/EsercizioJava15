@@ -150,13 +150,16 @@ public class ScanAutoEnum implements Auto {
 		
 	}
 	
+	
+	// TODO -> CHECK
 	// Questa funzione fa il compare tra le righe del file e i valori nell'enum "EnumAuto"
 	private void compareFileRowsWithEnumAuto(List<String> fileRows) {
 		
 		String[] splittedRow;
 		String rowBrand = "";
-		List<String> rowModels = new ArrayList<String>();
-		List<String> currentEnumModels = new ArrayList<String>();
+//		List<String> rowModels = new ArrayList<String>();
+		String[] rowModels;
+//		List<String> currentEnumModels = new ArrayList<String>();
 		
 		for (String row : fileRows) {
 			
@@ -177,7 +180,7 @@ public class ScanAutoEnum implements Auto {
 			for (EnumAuto enumBrandName : EnumAuto.values()) {
 				
 				// Se il nome del brand e i modelli della riga sono uguali a quelli dell'enum
-				if (rowModels.size() > 0 && rowBrand.equals(enumBrandName.name()) && compareRowModelsToEnumModels(rowModels, Arrays.asList(enumBrandName.getModelli()))) {
+				if (rowModels.length > 0 && rowBrand.equals(enumBrandName.name()) && compareRowModelsToEnumModels(rowModels, enumBrandName.getModelli())) {
 					// Aggiungo la riga a quelle corrette
 					this.allFileGoodRows.add(row);
 					continue;
@@ -195,19 +198,23 @@ public class ScanAutoEnum implements Auto {
 	
 	/* Questa funzione prende la lista fornita come argomento e rimuove il primo elemento, ovvero il brand. 
 	 * Se ho quindi una riga con solo il brand verrà restituita una lista vuota */
-	private List<String> getAutoModels(String[] splittedRow) {
+	private String[] getAutoModels(String[] splittedRow) {
 		
-		List<String> autoModels = new ArrayList();
+		List<String> autoModels = new ArrayList<String>();
 		
 		for (int i = 1; i < splittedRow.length; i++) {
 			autoModels.add(splittedRow[i]);
 		}
 		
-		return autoModels;
+		/* "toArray()" senza parametri ritorna un Object[] perché Java non può determinare
+		automaticamente il tipo specifico dell'array in fase di runtime.
+		"toArray(T[] a)" permette di specificare il tipo dell'array, e se la dimensione
+		dell'array passato è troppo piccola, ne verrà creato uno nuovo con la dimensione corretta. */
+		return autoModels.toArray(new String[0]);
 	}
 	
 	// Questa funzione confronta i modelli della riga passata con quelli dell'elemento nell'enum
-	private boolean compareRowModelsToEnumModels(List<String> rowModels, List<String> enumModels) {
+	private boolean compareRowModelsToEnumModels(String[] rowModels, String[] enumModels) {
 		return rowModels.equals(enumModels);
 	}
 	
