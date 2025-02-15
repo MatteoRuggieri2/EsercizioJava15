@@ -198,7 +198,7 @@ public class ScanAutoEnum implements Auto {
 	
 	/* Questa funzione prende la lista fornita come argomento e rimuove il primo elemento, ovvero il brand. 
 	 * Se ho quindi una riga con solo il brand verrà restituita una lista vuota */
-	private String[] getAutoModels(String[] splittedRow) {
+	protected String[] getAutoModels(String[] splittedRow) {
 		
 		List<String> autoModels = new ArrayList<String>();
 		
@@ -220,11 +220,11 @@ public class ScanAutoEnum implements Auto {
 	
 	// Questa funzione splitta la stringa con lo splitter passato come parametro
 	private String[] stringSplitter(String string, String splitter) {
-		String[] splittedString;
+//		String[] splittedString;
 		
 		// Splitto la riga e la ritorno
-		splittedString = string.strip().split(splitter);
-		return splittedString;
+		return string.strip().split(splitter);
+//		return splittedString;
 	}
 	
 	

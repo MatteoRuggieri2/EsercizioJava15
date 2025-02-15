@@ -82,5 +82,27 @@ class ScanAutoEnumTest {
 		
 		assertArrayEquals(scanAutoEnum.allFileBrands.toArray(), expectedBrands);
 	}
+	
+	@Test
+	void getAutoModelsTest() {
+		String[] splittedRow = {
+				"PORSCHE",
+				"GTRS3",
+				"CAYENNE",
+				"TAYCAN",
+		};
+		
+		String[] expectedModels = {
+				"GTRS3",
+				"CAYENNE",
+				"TAYCAN",
+		};
+		
+		assertArrayEquals(expectedModels, scanAutoEnum.getAutoModels(splittedRow));
+	}
+	
+	// test compareRowModelsToEnumModels()
+	// test stringSplitter()
+	// test compareFileRowsWithEnumAuto()
 
 }
