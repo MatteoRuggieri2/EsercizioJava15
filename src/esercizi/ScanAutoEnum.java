@@ -18,6 +18,9 @@ public class ScanAutoEnum implements Auto {
 	 * - completare metodi non definiti
 	 * - fare i test dei metodi */
 	
+	//TODO -> Fare Exception personalizzata quando il file è vuoto o inesistente
+	
+	
 	
 	String fileLine;
 	
@@ -60,14 +63,21 @@ public class ScanAutoEnum implements Auto {
 
 	@Override
 	public String[] autoProducers() {
-		// Non può convertire LinkedHashSet in un array di stringhe
+		/* Di base toArray() senza parametri converte in un array di Object,
+		mettendo invece un array di String come argomento, grazie ai generics
+		ritorna un array di String */
 		return this.allFileBrands.toArray(new String[0]);
 	}
 
+	/* Questo metodo ritorna tutti i produttori definiti
+	 * all'interno dell'enumerazione "EnumAuto" */
 	@Override
 	public String[] autoProducersDefined() {
-		// TODO Auto-generated method stub
-		return null;
+		String autoProducersDefined = "";
+		for (EnumAuto enumProducer : EnumAuto.values()) {
+			autoProducersDefined += enumProducer.name() + " ";
+		}
+		return autoProducersDefined.split(" ");
 	}
 
 	// Questo metodo ritorna "true" se il produttore passato esiste, altrimenti "false"
@@ -214,7 +224,7 @@ public class ScanAutoEnum implements Auto {
 	}
 	
 	// Questa funzione confronta i modelli della riga passata con quelli dell'elemento nell'enum
-	private boolean compareRowModelsToEnumModels(String[] rowModels, String[] enumModels) {
+	protected boolean compareRowModelsToEnumModels(String[] rowModels, String[] enumModels) {
 		return rowModels.equals(enumModels);
 	}
 	

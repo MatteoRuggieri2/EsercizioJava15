@@ -26,6 +26,18 @@ class ScanAutoEnumTest {
 	}
 	
 	@Test
+	void autoProducersDefined() {
+		
+		String[] expectedAutoProducers = {
+				"STELLANTIS",
+				"AUDI",
+				"TESLA",
+		};
+		
+		assertArrayEquals(expectedAutoProducers, scanAutoEnum.autoProducersDefined());
+	}
+	
+	@Test
 	void readFileTest() {
 		
 		String[] expectedRows = {
@@ -101,7 +113,31 @@ class ScanAutoEnumTest {
 		assertArrayEquals(expectedModels, scanAutoEnum.getAutoModels(splittedRow));
 	}
 	
-	// test compareRowModelsToEnumModels()
+//	@Test
+//	void compareRowModelsToEnumModelsTest() {
+//		String[] models1 = {
+//				"TIPO",
+//				"PANDA",
+//				"500",
+//		};
+//		
+//		String[] models2 = {
+//				"GTRS3",
+//				"CAYENNE",
+//				"TAYCAN",
+//		};
+//		
+//		String[] enumValues = {
+//				"TIPO",
+//				"PANDA",
+//				"500",
+//				"A4",
+//				"T1",
+//		};
+//		
+//		assertTrue(scanAutoEnum.compareRowModelsToEnumModels(models1, enumValues));
+//	}
+	
 	// test stringSplitter()
 	// test compareFileRowsWithEnumAuto()
 
