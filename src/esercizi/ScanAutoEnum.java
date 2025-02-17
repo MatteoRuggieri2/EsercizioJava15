@@ -20,7 +20,6 @@ public class ScanAutoEnum implements Auto {
 	 * - completare metodi non definiti
 	 * - fare i test dei metodi */
 	
-	//TODO -> Fare Exception personalizzata quando il file è vuoto o inesistente
 	
 	
 	
@@ -86,13 +85,15 @@ public class ScanAutoEnum implements Auto {
 	@Override
 	public boolean existsProducer(String autoProducer) {
 		
-		for (EnumAuto enumProducer : EnumAuto.values()) {
-			if (autoProducer.equalsIgnoreCase(enumProducer.name())) {
-				return true;
-			}
-		}
+//		for (EnumAuto enumProducer : EnumAuto.values()) {
+//			if (autoProducer.equalsIgnoreCase(enumProducer.name())) {
+//				return true;
+//			}
+//		}
+//		
+//		return false;
 		
-		return false;
+		return EnumAuto.checkBrand(autoProducer);
 	}
 
 	// Questo metodo ritorna "true" se il produttore e il modello passati esistono, altrimenti "false"
@@ -162,11 +163,6 @@ public class ScanAutoEnum implements Auto {
 			this.allFileBrands.add(splittedRow[0]);
 		}
 		
-		// Stampo tutti i brand
-//		for (String brand : allFileBrands) {
-//			System.out.println(brand);
-//		}
-		
 	}
 	
 	
@@ -176,40 +172,44 @@ public class ScanAutoEnum implements Auto {
 		
 		String[] splittedRow;
 		String rowBrand = "";
-//		List<String> rowModels = new ArrayList<String>();
 		String[] rowModels;
+//		List<String> rowModels = new ArrayList<String>();
 //		List<String> currentEnumModels = new ArrayList<String>();
 		
 		for (String row : fileRows) {
 			
 			// Controllo se il brand della riga e i modelli della riga corrispondono ad un'enumerazione
 			
-			// Splitto la riga
 			splittedRow = row.split(" +");
-			
-			// Prendo il brand della riga
 			rowBrand = splittedRow[0];
-
-			// Prendo i modelli della riga
 			rowModels = getAutoModels(splittedRow);
 			
-			System.out.println("modelli della riga: " + rowModels);
+			// Controllo se esiste il brand
+			EnumAuto.checkBrand(rowBrand);
 			
-			// Per ogni elemento di enum
-			for (EnumAuto enumBrandName : EnumAuto.values()) {
-				
-				// Se il nome del brand e i modelli della riga sono uguali a quelli dell'enum
-				if (rowModels.length > 0 && rowBrand.equals(enumBrandName.name()) && compareRowModelsToEnumModels(rowModels, enumBrandName.getModelli())) {
-					// Aggiungo la riga a quelle corrette
-					this.allFileGoodRows.add(row);
-					continue;
-				} else {
-					// NON SO PERCHE' VENGONO STAMPATI DOPPIONI
-					// Aggiungo la riga a quelle sbagliate
-					this.allFileWrongRows.add(row);
-				}
-				
-			}
+			// Controllo se tutti i modelli esistono in quel brand
+			
+			
+			
+			
+			
+			
+			
+//			// Per ogni elemento di enum
+//			for (EnumAuto enumBrandName : EnumAuto.values()) {
+//				
+//				// Se il nome del brand e i modelli della riga sono uguali a quelli dell'enum
+//				if (rowModels.length > 0 && rowBrand.equals(enumBrandName.name()) && compareRowModelsToEnumModels(rowModels, enumBrandName.getModelli())) {
+//					// Aggiungo la riga a quelle corrette
+//					this.allFileGoodRows.add(row);
+//					continue;
+//				} else {
+//					// NON SO PERCHE' VENGONO STAMPATI DOPPIONI
+//					// Aggiungo la riga a quelle sbagliate
+//					this.allFileWrongRows.add(row);
+//				}
+//				
+//			}
 			
 		}
 
@@ -232,10 +232,10 @@ public class ScanAutoEnum implements Auto {
 		return autoModels.toArray(new String[0]);
 	}
 	
-	// Questa funzione confronta i modelli della riga passata con quelli dell'elemento nell'enum
-	protected boolean compareRowModelsToEnumModels(String[] rowModels, String[] enumModels) {
-		return rowModels.equals(enumModels);
-	}
+//	// Questa funzione confronta i modelli della riga passata con quelli dell'elemento nell'enum
+//	protected boolean compareRowModelsToEnumModels(String[] rowModels, String[] enumModels) {
+//		return rowModels.equals(enumModels);
+//	}
 	
 }
 

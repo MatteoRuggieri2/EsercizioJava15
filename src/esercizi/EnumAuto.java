@@ -16,9 +16,9 @@ public enum EnumAuto {
 	}
 	
 	/* Questo metodo controlla che il brand sia incluso nell'enumerazione "EnumAuto" */
-	public boolean checkBrand(String brand) {
+	static public boolean checkBrand(String brand) {
 		for (EnumAuto enumBrand : EnumAuto.values()) {
-			if (enumBrand.name().equals(brand)) {   // Con .name() prendo il nome dell'enumerazione
+			if (enumBrand.name().equalsIgnoreCase(brand)) {   // Con .name() prendo il nome dell'enumerazione
 				return true;
 			}
 		}
