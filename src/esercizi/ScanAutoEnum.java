@@ -62,6 +62,7 @@ public class ScanAutoEnum implements Auto {
 		return null;
 	}
 
+	// Questo metodo ritorna tutti i produttori di auto contenuti nel file
 	@Override
 	public String[] autoProducers() {
 		/* Di base toArray() senza parametri converte in un array di Object,
@@ -84,15 +85,6 @@ public class ScanAutoEnum implements Auto {
 	// Questo metodo ritorna "true" se il produttore passato esiste, altrimenti "false"
 	@Override
 	public boolean existsProducer(String autoProducer) {
-		
-//		for (EnumAuto enumProducer : EnumAuto.values()) {
-//			if (autoProducer.equalsIgnoreCase(enumProducer.name())) {
-//				return true;
-//			}
-//		}
-//		
-//		return false;
-		
 		return EnumAuto.checkBrand(autoProducer);
 	}
 
@@ -185,7 +177,7 @@ public class ScanAutoEnum implements Auto {
 			rowModels = getAutoModels(splittedRow);
 			
 			// Controllo se esiste il brand
-			EnumAuto.checkBrand(rowBrand);
+			existsProducer(rowBrand);
 			
 			// Controllo se tutti i modelli esistono in quel brand
 			
