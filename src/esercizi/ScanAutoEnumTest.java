@@ -132,6 +132,20 @@ class ScanAutoEnumTest {
 		assertArrayEquals(expectedModels, scanAutoEnum.getAutoModels(splittedRow));
 	}
 	
+	@Test
+	void checkBrandModelsTest() {
+		
+		String[] modelsArr = {
+				"Tipo",
+				"Panda",
+				"500",
+		};
+		
+		assertTrue(scanAutoEnum.checkBrandModels("Stellantis", modelsArr));
+		assertFalse(scanAutoEnum.checkBrandModels("Tesla", modelsArr));
+		assertFalse(scanAutoEnum.checkBrandModels("Renault", modelsArr));
+	}
+	
 //	@Test
 //	void compareRowModelsToEnumModelsTest() {
 //		String[] models1 = {
