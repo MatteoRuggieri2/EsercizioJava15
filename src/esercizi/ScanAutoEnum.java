@@ -10,6 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import exceptions.AutoFileInputEmptyException;
+
 public class ScanAutoEnum implements Auto {
 	
 	//TODO
@@ -39,7 +41,7 @@ public class ScanAutoEnum implements Auto {
 	List<String> allFileGoodRows = new ArrayList<String>();
 	
 	
-	public ScanAutoEnum(String fileName) {
+	public ScanAutoEnum(String fileName) throws AutoFileInputEmptyException {
 		readFile(fileName);
 		getBrandFromFileRows(this.allFileRows);
 		compareFileRowsWithEnumAuto(this.allFileRows);
@@ -115,7 +117,9 @@ public class ScanAutoEnum implements Auto {
 	
 	/* Questa funzione legge il file in base al path che gli passiamo,
 	salva ogni riga come elemento di this.allFileRows eccetto quelle vuote. */
-	public void readFile(String fileName) {
+	public void readFile(String fileName) throws AutoFileInputEmptyException {
+		
+		boolean emptyFile = true;
 		
 		try {
 			
@@ -127,14 +131,19 @@ public class ScanAutoEnum implements Auto {
 			
 			while ((this.fileLine = bufferedReader.readLine()) != null) {
 				if (!this.fileLine.trim().isEmpty()) {
+					emptyFile = false;
 					this.allFileRows.add(this.fileLine);
 				}
 			}
 			
 			bufferedReader.close();
 			
+			if (emptyFile) {
+				throw new AutoFileInputEmptyException("Il file analizzato risulta vuoto.");
+			}
+			
 		} catch (IOException e) {
-			System.err.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
+			throw new AutoFileInputEmptyException("Si è verificato un errore durante la lettura del file: " + e.getMessage());
 		}
 	
 	}
@@ -147,7 +156,7 @@ public class ScanAutoEnum implements Auto {
 		
 		for (String row : fileRows) {
 			
-			splittedRow = stringSplitter(row, " +");
+			splittedRow = row.split(" +");
 			
 			// Salvo il brand della riga
 			this.allFileBrands.add(splittedRow[0]);
@@ -176,7 +185,7 @@ public class ScanAutoEnum implements Auto {
 			// Controllo se il brand della riga e i modelli della riga corrispondono ad un'enumerazione
 			
 			// Splitto la riga
-			splittedRow = stringSplitter(row, " +");
+			splittedRow = row.split(" +");
 			
 			// Prendo il brand della riga
 			rowBrand = splittedRow[0];
@@ -227,16 +236,6 @@ public class ScanAutoEnum implements Auto {
 	protected boolean compareRowModelsToEnumModels(String[] rowModels, String[] enumModels) {
 		return rowModels.equals(enumModels);
 	}
-	
-	// Questa funzione splitta la stringa con lo splitter passato come parametro
-	private String[] stringSplitter(String string, String splitter) {
-//		String[] splittedString;
-		
-		// Splitto la riga e la ritorno
-		return string.strip().split(splitter);
-//		return splittedString;
-	}
-	
 	
 }
 

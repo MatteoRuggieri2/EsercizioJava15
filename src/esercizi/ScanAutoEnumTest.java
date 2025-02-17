@@ -9,16 +9,17 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import exceptions.AutoFileInputEmptyException;
+
 class ScanAutoEnumTest {
 	
-	static ScanAutoEnum scanAutoEnum;
-//	static ScanAutoEnum wrongScanAutoEnum;
-	static String autoBrandsFileName = "src/text_files/auto-brands.txt";
-//	static String autoBrandsWrongFileName = "src/text_files/wrong-file-name.txt";
+	ScanAutoEnum scanAutoEnum;
+	String autoBrandsFileName = "src/text_files/auto-brands.txt";
+	String blankAutoBrandsFileName = "src/text_files/auto-brands-only-spaces.txt";
+	String emptyAutoBrandsFileName = "src/text_files/auto-brands-empty.txt";
+	String autoBrandsWrongFileName = "src/text_files/wrong-file-name.txt";
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
+	
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -26,7 +27,25 @@ class ScanAutoEnumTest {
 	}
 	
 	@Test
-	void autoProducersDefined() {
+	void autoFileInputEmptyExceptionTest() {
+		
+		assertThrows(AutoFileInputEmptyException.class, () -> {
+			scanAutoEnum = new ScanAutoEnum(blankAutoBrandsFileName);
+		}, "AutoFileInputEmptyException: Il file analizzato risulta vuoto.");
+		
+		assertThrows(AutoFileInputEmptyException.class, () -> {
+			scanAutoEnum = new ScanAutoEnum(emptyAutoBrandsFileName);
+		}, "AutoFileInputEmptyException: Il file analizzato risulta vuoto.");
+		
+		assertThrows(AutoFileInputEmptyException.class, () -> {
+			scanAutoEnum = new ScanAutoEnum(autoBrandsWrongFileName);
+		}, "AutoFileInputEmptyException: Si è verificato un errore durante"
+				+ " la lettura del file: src/text_files/wrong-file-name.txt"
+				+ " (No such file or directory)");
+	}
+	
+	@Test
+	void autoProducersDefinedTest() {
 		
 		String[] expectedAutoProducers = {
 				"STELLANTIS",
