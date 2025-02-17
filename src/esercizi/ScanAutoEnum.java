@@ -48,14 +48,14 @@ public class ScanAutoEnum implements Auto {
 		System.out.println("Righe sbagliate: \n" + this.allFileWrongRows);
 	}
 
+	// Questo metodo ritorna le righe errate del file
 	@Override
 	public String[] rowsWrong() {
 		// TODO Auto-generated method stub
-		/* - Leggi tutte le righe da this.allFileRows
-		 * - Per ogni riga scarta se: produttore non definito e/o modello non definito */
 		return null;
 	}
 
+	// Questo metodo ritorna le righe corrette del file
 	@Override
 	public String[] rowsGood() {
 		// TODO Auto-generated method stub
@@ -165,8 +165,6 @@ public class ScanAutoEnum implements Auto {
 		String[] splittedRow;
 		String rowBrand = "";
 		String[] rowModels;
-//		List<String> rowModels = new ArrayList<String>();
-//		List<String> currentEnumModels = new ArrayList<String>();
 		
 		for (String row : fileRows) {
 			
@@ -180,7 +178,7 @@ public class ScanAutoEnum implements Auto {
 			existsProducer(rowBrand);
 			
 			// Controllo se tutti i modelli esistono in quel brand
-			
+			checkBrandModels(rowBrand, rowModels);
 			
 			
 			
@@ -228,6 +226,23 @@ public class ScanAutoEnum implements Auto {
 //	protected boolean compareRowModelsToEnumModels(String[] rowModels, String[] enumModels) {
 //		return rowModels.equals(enumModels);
 //	}
+	
+	/* Questo metodo, oltre a verificare l'esistenza del brand passato come parametro
+	 * verifica che quel produttore produca tutti i modelli forniti nell'array.
+	 * Se produce tutti i modelli passati ritornerà TRUE, altrimenti FALSE. */
+	protected boolean checkBrandModels(String brand, String[] models) {
+		if (!existsProducer(brand)) { return false; }
+		
+		EnumAuto brandEnum = EnumAuto.valueOf(brand.toUpperCase());
+		
+		for (String model : models) {
+			if (!brandEnum.isModelDefined(model)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 	
 }
 
