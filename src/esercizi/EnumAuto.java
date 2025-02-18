@@ -32,7 +32,7 @@ public enum EnumAuto {
 	public boolean isModelDefined(String model) {
 		
 		for (String modello : arrModello) {
-			if (modello.equals(model)) {
+			if (modello.equalsIgnoreCase(model)) {
 				return true;
 			}
 		}

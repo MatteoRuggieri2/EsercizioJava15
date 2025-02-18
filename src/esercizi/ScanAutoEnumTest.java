@@ -23,6 +23,7 @@ class ScanAutoEnumTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		System.err.println("\n--> SET UP - JUnit");
 		scanAutoEnum = new ScanAutoEnum(autoBrandsFileName);
 	}
 	
@@ -67,6 +68,7 @@ class ScanAutoEnumTest {
 				"CITROEN",
 				"SKODA FABIA",
 				"PORSCHE GTRS3 CAYENNE TAYCAN",
+				"TESLA T1",
 		};
 		
 		assertArrayEquals(scanAutoEnum.allFileRows.toArray(), expectedRows);
@@ -109,6 +111,7 @@ class ScanAutoEnumTest {
 				"CITROEN",
 				"SKODA",
 				"PORSCHE",
+				"TESLA",
 		};
 		
 		assertArrayEquals(scanAutoEnum.allFileBrands.toArray(), expectedBrands);
@@ -145,33 +148,5 @@ class ScanAutoEnumTest {
 		assertFalse(scanAutoEnum.checkBrandModels("Tesla", modelsArr));
 		assertFalse(scanAutoEnum.checkBrandModels("Renault", modelsArr));
 	}
-	
-//	@Test
-//	void compareRowModelsToEnumModelsTest() {
-//		String[] models1 = {
-//				"TIPO",
-//				"PANDA",
-//				"500",
-//		};
-//		
-//		String[] models2 = {
-//				"GTRS3",
-//				"CAYENNE",
-//				"TAYCAN",
-//		};
-//		
-//		String[] enumValues = {
-//				"TIPO",
-//				"PANDA",
-//				"500",
-//				"A4",
-//				"T1",
-//		};
-//		
-//		assertTrue(scanAutoEnum.compareRowModelsToEnumModels(models1, enumValues));
-//	}
-	
-	// test stringSplitter()
-	// test compareFileRowsWithEnumAuto()
 
 }
