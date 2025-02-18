@@ -46,8 +46,7 @@ public class ScanAutoEnum implements Auto {
 	// Questo metodo ritorna le righe corrette del file
 	@Override
 	public String[] rowsGood() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.allFileGoodRows.toArray(new String[0]);
 	}
 
 	// Questo metodo ritorna tutti i produttori di auto contenuti nel file in ordine alfabetico
