@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,15 +11,6 @@ import java.util.Set;
 import exceptions.AutoFileInputEmptyException;
 
 public class ScanAutoEnum implements Auto {
-	
-	//TODO
-	/* - guarda specifiche delle liste Collection
-	 * - controllare metodi già fatti
-	 * - completare metodi non definiti
-	 * - fare i test dei metodi */
-	
-	
-	
 	
 	String fileLine;
 	
@@ -51,8 +40,7 @@ public class ScanAutoEnum implements Auto {
 	// Questo metodo ritorna le righe errate del file
 	@Override
 	public String[] rowsWrong() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.allFileWrongRows.toArray(new String[0]);
 	}
 
 	// Questo metodo ritorna le righe corrette del file
@@ -62,7 +50,6 @@ public class ScanAutoEnum implements Auto {
 		return null;
 	}
 
-	//TODO -> CHECK
 	// Questo metodo ritorna tutti i produttori di auto contenuti nel file in ordine alfabetico
 	@Override
 	public String[] autoProducers() {
