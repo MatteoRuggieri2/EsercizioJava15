@@ -159,7 +159,7 @@ public class ScanAutoEnum implements Auto {
 	}
 	
 	// Questa funzione fa il compare tra le righe del file e i valori nell'enum "EnumAuto"
-	private void rowsAnalyzer(List<String> fileRows) {
+	protected void rowsAnalyzer(List<String> fileRows) {
 		
 		String[] splittedRow;
 		String rowBrand = "";

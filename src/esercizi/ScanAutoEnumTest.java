@@ -3,6 +3,7 @@ package esercizi;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -147,6 +148,60 @@ class ScanAutoEnumTest {
 		assertTrue(scanAutoEnum.checkBrandModels("Stellantis", modelsArr));
 		assertFalse(scanAutoEnum.checkBrandModels("Tesla", modelsArr));
 		assertFalse(scanAutoEnum.checkBrandModels("Renault", modelsArr));
+	}
+	
+	@Test
+	void rowAnalyzerTest() {
+		
+		String[] expectedGoodRows = {
+				"STELLANTIS TIPO PANDA 500",
+				"TESLA T1",
+		};
+		
+		String[] expectedWrongRows = {
+				"BMW",
+				"AUDI A4 A5 A6",
+				"VW",
+				"CITROEN",
+				"SKODA FABIA",
+				"PORSCHE GTRS3 CAYENNE TAYCAN",
+		};
+		
+		assertArrayEquals(expectedGoodRows, scanAutoEnum.allFileGoodRows.toArray());
+		assertArrayEquals(expectedWrongRows, scanAutoEnum.allFileWrongRows.toArray());
+	}
+	
+	@Test
+	void rowAnalyzerTest2() {
+		
+		String[] fileRowsTest = {
+				"FERRARI",
+				"AUDI A4 A5 A6",
+				"CITROEN",
+				"TESLA T1",
+				"LAMBORGHINI URACAN",
+				"PORSCHE GTRS3 CAYENNE TAYCAN",
+				"PAGANI",
+		};
+		
+		String[] expectedGoodRows = {
+				"TESLA T1",
+		};
+		
+		String[] expectedWrongRows = {
+				"FERRARI",
+				"AUDI A4 A5 A6",
+				"CITROEN",
+				"LAMBORGHINI URACAN",
+				"PORSCHE GTRS3 CAYENNE TAYCAN",
+				"PAGANI",
+		};
+		
+		scanAutoEnum.allFileGoodRows.clear();
+		scanAutoEnum.allFileWrongRows.clear();
+		scanAutoEnum.rowsAnalyzer(Arrays.asList(fileRowsTest));
+		assertArrayEquals(expectedGoodRows, scanAutoEnum.allFileGoodRows.toArray());
+		assertArrayEquals(expectedWrongRows, scanAutoEnum.allFileWrongRows.toArray());
 	}
 
 }
